@@ -64,7 +64,7 @@ const Header = ({ onNavigate }: HeaderProps) => {
         <p
           className={`text-body text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 scroll-fade-up stagger-3 ${isVisible ? 'visible' : ''}`}
         >
-          Crafted with Final Cut Pro — where every frame tells a story and every cut is intentional.
+          Clean cuts. Strong pacing. No wasted frames.
         </p>
 
         {/* Long Form / Short Form Navigation */}
