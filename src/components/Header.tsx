@@ -58,13 +58,13 @@ const Header = ({ onNavigate }: HeaderProps) => {
           className={`heading-display text-5xl md:text-7xl lg:text-8xl mb-4 scroll-fade-up stagger-2 ${isVisible ? 'visible' : ''}`}
         >
           <span className="text-foreground">Hi, I'm </span>
-          <span className="gradient-text glow-text">RamLal</span>
+          <span className="gradient-text glow-text">Ishan</span>
         </h1>
 
         <p
           className={`text-body text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 scroll-fade-up stagger-3 ${isVisible ? 'visible' : ''}`}
         >
-          Clean cuts. Strong pacing. No wasted frames.
+          Crafted with Final Cut Pro — where every frame tells a story and every cut is intentional.
         </p>
 
         {/* Long Form / Short Form Navigation */}
@@ -73,12 +73,14 @@ const Header = ({ onNavigate }: HeaderProps) => {
             onClick={() => onNavigate('long')}
             className="glass-card-hover magnetic-hover px-8 py-3 text-sm tracking-wider uppercase text-foreground/80 hover:text-foreground transition-all duration-300 flex items-center gap-2"
           >
+            <span className="w-8 h-1 bg-accent rounded-full" />
             Long Form
           </button>
           <button
             onClick={() => onNavigate('short')}
             className="glass-card-hover magnetic-hover px-8 py-3 text-sm tracking-wider uppercase text-foreground/80 hover:text-foreground transition-all duration-300 flex items-center gap-2"
           >
+            <span className="w-1 h-8 bg-accent rounded-full" />
             Short Form
           </button>
         </div>
