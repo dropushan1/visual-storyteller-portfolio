@@ -1,4 +1,5 @@
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import CategoryFilter from "@/components/CategoryFilter";
 import VideoGrid from "@/components/VideoGrid";
@@ -66,6 +67,19 @@ const shortFormVideos = [
 
 const categories = ["All", ...Object.keys(longFormData)];
 
+const categoryToSlug = (category: string) => {
+  if (category === "All") return "";
+  return category.toLowerCase().replace(/\s+/g, "-");
+};
+
+const slugToCategory = (slug: string | undefined) => {
+  if (!slug) return "All";
+  const found = categories.find(
+    (c) => categoryToSlug(c) === slug.toLowerCase()
+  );
+  return found || "All";
+};
+
 // Round-robin function to interleave videos from all categories
 const getRoundRobinVideos = () => {
   const categoryArrays = Object.entries(longFormData).map(([category, ids]) => ({
@@ -95,9 +109,21 @@ const getRoundRobinVideos = () => {
 };
 
 const Index = () => {
-  const [activeCategory, setActiveCategory] = useState("All");
+  const { niche } = useParams();
+  const navigate = useNavigate();
+  const [activeCategory, setActiveCategory] = useState(slugToCategory(niche));
   const longFormRef = useRef<HTMLDivElement>(null);
   const shortFormRef = useRef<HTMLDivElement>(null);
+
+  // Update active category when URL changes
+  useEffect(() => {
+    setActiveCategory(slugToCategory(niche));
+  }, [niche]);
+
+  const handleCategoryChange = (category: string) => {
+    const slug = categoryToSlug(category);
+    navigate(slug ? `/${slug}` : "/");
+  };
 
   const filteredVideos = useMemo(() => {
     if (activeCategory === "All") {
@@ -127,7 +153,7 @@ const Index = () => {
         <CategoryFilter
           categories={categories}
           activeCategory={activeCategory}
-          onCategoryChange={setActiveCategory}
+          onCategoryChange={handleCategoryChange}
         />
         <main>
           <VideoGrid key={activeCategory} videos={filteredVideos} />
