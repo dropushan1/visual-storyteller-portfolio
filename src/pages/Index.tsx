@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import CategoryFilter from "@/components/CategoryFilter";
 import VideoGrid from "@/components/VideoGrid";
 import ShortFormGrid from "@/components/ShortFormGrid";
+import ThumbnailGrid from "@/components/ThumbnailGrid";
 import SectionTitle from "@/components/SectionTitle";
 import Footer from "@/components/Footer";
 
@@ -68,6 +69,24 @@ const shortFormVideos = [
   "1SVnhA094XW6Cv8Q5zOBWe6vuXZqcGkc9",
 ];
 
+// Thumbnail images
+const thumbnails = [
+  "1ebR0SLC44KVGQkNAzjMnmI8B0P-0flip",
+  "1YJt2nyQNIl59EUULrXq17_mSw2m25sSs",
+  "1cRhd3zSUCbkT9C4Wxmtb9vcdMOht-uHI",
+  "1Qqftm8PsylA5TTyRU-3uUri_I9AiSfmI",
+  "1AiqYcskUgOB7qpvxn952i1Yr4YhtI7Bb",
+  "13Wlj3avzY3GIpK68MS_L3-eejGA_bren",
+  "1U8Qs1tKQNZF_k7TpRt_zSACJzIpy7R4G",
+  "1b7aTAqhw_-T1rKIKqKgdh3Agk-PJIwAZ",
+  "1FA86BLTyzDPeYwtdiILyiuL0y-9bmSQk",
+  "16HHHo3NGJFjxwDgRr51uvaA2y4Sfi2b5",
+  "1wMn1ubg2yGyDBWRpPGfDOymSRD5-UI7r",
+  "1uiBgy1tTBs3eOyOq8IWAEggZ5cSGcr5n",
+  "1JoZmRikuKz9mYy1cC8C74gZjZ0RUo1Oz",
+  "1P63rHx0xekMrhunhwJAH1N7xbFbNbjEm",
+];
+
 const categories = ["All", ...Object.keys(longFormData)];
 
 const categoryToSlug = (category: string) => {
@@ -117,6 +136,7 @@ const Index = () => {
   const [activeCategory, setActiveCategory] = useState(slugToCategory(niche));
   const longFormRef = useRef<HTMLDivElement>(null);
   const shortFormRef = useRef<HTMLDivElement>(null);
+  const thumbnailsRef = useRef<HTMLDivElement>(null);
 
   // Update active category when URL changes
   useEffect(() => {
@@ -138,9 +158,14 @@ const Index = () => {
     }));
   }, [activeCategory]);
 
-  const handleNavigate = (section: 'long' | 'short') => {
-    const ref = section === 'long' ? longFormRef : shortFormRef;
-    ref.current?.scrollIntoView({ behavior: 'smooth' });
+  const handleNavigate = (section: 'long' | 'short' | 'thumbnails') => {
+    let ref;
+    switch (section) {
+      case 'long': ref = longFormRef; break;
+      case 'short': ref = shortFormRef; break;
+      case 'thumbnails': ref = thumbnailsRef; break;
+    }
+    ref?.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -164,12 +189,21 @@ const Index = () => {
       </section>
 
       {/* Short Form Section */}
-      <section ref={shortFormRef} className="pt-16 pb-16">
+      <section ref={shortFormRef} className="pt-16">
         <SectionTitle
           title="Short Form"
           subtitle="Vertical content optimized for social media"
         />
         <ShortFormGrid videos={shortFormVideos} />
+      </section>
+
+      {/* Thumbnails Section */}
+      <section ref={thumbnailsRef} className="pt-16 pb-16">
+        <SectionTitle
+          title="Thumbnails"
+          subtitle="Eye-catching graphic design and visual storytelling"
+        />
+        <ThumbnailGrid thumbnails={thumbnails} />
       </section>
 
       <Footer />

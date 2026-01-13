@@ -2,7 +2,7 @@ import { useScrollAnimation, useParallax, useMousePosition } from '@/hooks/useSc
 import fcpIcon from '@/assets/final-cut-pro-icon.png';
 
 interface HeaderProps {
-  onNavigate: (section: 'long' | 'short') => void;
+  onNavigate: (section: 'long' | 'short' | 'thumbnails') => void;
 }
 
 const Header = ({ onNavigate }: HeaderProps) => {
@@ -67,8 +67,8 @@ const Header = ({ onNavigate }: HeaderProps) => {
           Clean cuts. Strong pacing. No wasted frames.
         </p>
 
-        {/* Long Form / Short Form Navigation */}
-        <div className={`flex justify-center gap-4 scroll-fade-up stagger-4 ${isVisible ? 'visible' : ''}`}>
+        {/* Long Form / Short Form / Thumbnails Navigation */}
+        <div className={`flex flex-wrap justify-center gap-4 scroll-fade-up stagger-4 ${isVisible ? 'visible' : ''}`}>
           <button
             onClick={() => onNavigate('long')}
             className="glass-card-hover magnetic-hover px-8 py-3 text-sm tracking-wider uppercase text-foreground/80 hover:text-foreground transition-all duration-300 flex items-center gap-2"
@@ -83,7 +83,15 @@ const Header = ({ onNavigate }: HeaderProps) => {
             <span className="w-1 h-8 bg-accent rounded-full" />
             Short Form
           </button>
+          <button
+            onClick={() => onNavigate('thumbnails')}
+            className="glass-card-hover magnetic-hover px-8 py-3 text-sm tracking-wider uppercase text-foreground/80 hover:text-foreground transition-all duration-300 flex items-center gap-2"
+          >
+            <span className="w-4 h-4 bg-accent rounded-full" />
+            Thumbnails
+          </button>
         </div>
+
 
         {/* Scroll indicator */}
         <div className={`mt-16 scroll-fade-up stagger-5 ${isVisible ? 'visible' : ''}`}>
