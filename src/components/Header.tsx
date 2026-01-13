@@ -50,7 +50,7 @@ const Header = ({ onNavigate }: HeaderProps) => {
 
         <div className={`scroll-fade-up stagger-1 ${isVisible ? 'visible' : ''}`}>
           <span className="inline-block px-4 py-1.5 mb-6 text-xs tracking-[0.3em] uppercase text-muted-foreground glass-card rounded-full">
-            Final Cut Pro Editor • 5+ Years Experience
+            Final Cut Pro Editor • 6+ Years Experience
           </span>
         </div>
 
